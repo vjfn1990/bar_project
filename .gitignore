@@ -1,4 +1,5 @@
 *.pyc
+db.sqlite3
 bar/migrations
 bar/__pycache__
 project/__pycache__
