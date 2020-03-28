@@ -1,0 +1,5 @@
+*.pyc
+bar/migrations
+bar/__pycache__
+project/__pycache__
+projectenv

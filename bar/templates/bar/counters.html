@@ -1,0 +1,39 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'bar/css/styles.css' %}">
+<script type="text/javascript" src="{% static 'bar/js/jquery-3.3.1.min.js' %}"></script>
+
+{% if counters %}
+    <ul class = 'main_ul'>
+    {% for counter in counters %}
+        <li class = 'main_li' onclick = 'beers("{{ counter.name }}")'>Counter name: {{ counter.name }}</li><ul id = '{{ counter.name }}'></ul>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No counters available.</p>
+{% endif %}
+
+<script>
+    var a;
+    function beers(name) {
+        var jqxhr = $.ajax({
+            url: "/bar/get_beers/",
+            method: "POST",
+            data: {
+                counter: name
+            }
+        })
+        .done(function(response) {
+            $('#'+name).html('');
+            for(a = 0; a < response.length; a++) {
+                $('#'+name).append('<li>Beer name: ' + response[a]['name'] + ' - Availability: ' + response[a]['availability'] + '</li>');
+            }
+        })
+        .fail(function() {
+            console.log('fail');
+        })
+        .always(function() {
+            console.log('always');
+        });
+    }
+</script>

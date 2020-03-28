@@ -1,0 +1,6 @@
+.main_ul {
+    cursor: pointer;
+}
+.main_li:hover {
+    color: #0000FF;
+}
